@@ -5,7 +5,6 @@
 // |  MAIN  |
 // +--------+
 int main(int argc, char *argv[]) {
-
-//caca
+  printf('Hello World\n');
   return 0;
 }
