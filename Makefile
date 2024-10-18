@@ -4,7 +4,7 @@ TARGET = pathfinding
 SRCS = main.c library.c
 
 all:
-	$(CC) $(CFLAGS) $(TARGET) -o $(TARGET)
+	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)
 
 clean:
 	rm -f $(TARGET)
