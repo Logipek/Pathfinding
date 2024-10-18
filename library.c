@@ -13,6 +13,7 @@ int nodes_quantity(FILE* file) {
   int i;
   while (fgets(buffer, 256, file) != NULL) {
     i++;
+    printf("Ligne suivante");
   }
   return i;
 }
