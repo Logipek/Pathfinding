@@ -4,7 +4,7 @@
 // +--------+
 // |  MAIN  |
 // +--------+
-int main(int argc, char* argv[]) {
-
-    return 0;
+int main(int argc, char *argv[]) {
+  // test
+  return 0;
 }
