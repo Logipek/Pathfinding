@@ -5,6 +5,8 @@
 // |  MAIN  |
 // +--------+
 int main(int argc, char *argv[]) {
-  printf("Hello, World!\n");
+
+  // ceci est un big test
+
   return 0;
 }
