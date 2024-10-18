@@ -1,4 +1,4 @@
-#ifdef
+#ifndef PATHFINDING
 #define PATHFINDING
 
 typedef struct {
