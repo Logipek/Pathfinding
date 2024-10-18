@@ -13,11 +13,11 @@ typedef struct {
 // +---------+
 // |  NODES  |
 // +---------+
-void parse_nodes_file(*FILE file); // Assign every nodes in file to 
-int nodes_quantity(*FILE file);
-int nodes_links_quantity(*FILE file);
-int node_start(*FILE file);
-int node_end(*FILE file);
+void parse_nodes_file(FILE* file); // Assign every nodes in file to 
+int nodes_quantity(FILE* file);
+int nodes_links_quantity(FILE* file);
+int node_start(FILE* file);
+int node_end(FILE* file);
 
 // +-------------------------+
 // |  PATHFINDING ALGORITHM  |
