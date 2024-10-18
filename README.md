@@ -1,6 +1,4 @@
-# Pathfinding algorithm
-
-## Modules
+# Projetc
 
 - Nodes parsing in file
 - Nodes Assign in structs
