@@ -8,6 +8,7 @@ typedef struct {
 typedef struct {
   int id;
   struct n **links;
+  int links_quantity;
 } Node;
 
 // +---------+
