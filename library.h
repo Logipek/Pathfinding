@@ -1,11 +1,7 @@
 #ifndef PATHFINDING
 #define PATHFINDING
 
-typedef struct {
-
-} n;
-
-typedef struct {
+typedef struct n {
   int id;
   struct n **links;
   int links_quantity;

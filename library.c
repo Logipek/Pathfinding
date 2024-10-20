@@ -15,8 +15,8 @@ int nodes_quantity(FILE* file) {
     int count = 0; 
     while (fgets(buffer, 256, file) != NULL) {
         if (strstr(buffer, "#node") != NULL) { // cherche le mot clé node 
-            while (fgets(buffer, 256, file) != NULL && buffer[0] != '#') { 
-                if (buffer[0] != '\n' && buffer[0] != '\r') { // vérifie si la ligne n'est pas vide
+            while (fgets(buffer, 256, file) != NULL && !strstr(buffer, "#links")) { 
+                if (buffer [0] != '#' && buffer[0] != '\n' && buffer[0] != '\r') { // vérifie si la ligne n'est pas vide et qu'elle ne commence pas par #
                     count++; 
                 }
             }
