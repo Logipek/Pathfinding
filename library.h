@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-// Déclaration de l'énumération Error
+// Déclarations d'énumérations et de structures
 typedef enum {
   FILE_NOT_FOUND = 1,
   NO_START_NODE = 2,
@@ -12,10 +12,9 @@ typedef enum {
   BAD_FILE_FORMAT = 5
 } Error;
 
-// Déclaration de la structure Node
 typedef struct n {
   int id;
-  struct n *next; // Pointeur vers le nœud suivant
+  struct n **links;
 } Node;
 
 // Déclarations de fonctions
@@ -24,6 +23,6 @@ int nodes_quantity(FILE* file);
 int nodes_links_quantity(FILE* file);
 int node_start(FILE* file);
 int node_end(FILE* file);
-Error init_graph(Node **nodes, Node **start_node); // Déclaration de la fonction init_graph
+Node* init_graph(Node **nodes); // Déclaration de la fonction init_graph
 
 #endif

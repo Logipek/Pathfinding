@@ -8,11 +8,9 @@ void parse_nodes_file(FILE* file) {
 
 int nodes_quantity(FILE* file) {
     char buffer[256];
-    int count = 0; // Compteur pour les nœuds
+    int count = 0; 
     while (fgets(buffer, 256, file) != NULL) {
-        // Cherche le mot-clé "#node" dans chaque ligne
         if (strstr(buffer, "#node") != NULL) {
-            // Lire les lignes suivantes jusqu'à une ligne vide ou un autre mot-clé
             while (fgets(buffer, 256, file) != NULL && buffer[0] != '#') {
                 if (buffer[0] != '\n' && buffer[0] != '\r') {
                     count++;
@@ -28,9 +26,7 @@ int nodes_links_quantity(FILE* file) {
     char buffer[256];
     int count = 0; // Compteur pour les liens
     while (fgets(buffer, 256, file) != NULL) {
-        // Cherche le mot-clé "#links" dans chaque ligne
         if (strstr(buffer, "#links") != NULL) {
-            // Lire les lignes suivantes jusqu'à une ligne vide ou un autre mot-clé
             while (fgets(buffer, 256, file) != NULL && buffer[0] != '#') {
                 if (buffer[0] != '\n' && buffer[0] != '\r') {
                     count++;
@@ -45,45 +41,41 @@ int nodes_links_quantity(FILE* file) {
 int node_start(FILE* file) {
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
-        // Cherche le mot-clé "#start" dans chaque ligne
         if (strstr(buffer, "#start") != NULL) {
-            // Lire la ligne suivante pour obtenir l'identifiant du nœud de départ
             if (fgets(buffer, 256, file) != NULL) {
                 return atoi(buffer);
             }
         }
     }
-    return -1; // Retourne -1 si le nœud de départ n'est pas trouvé
+    return -1;
 }
 
 int node_end(FILE* file) {
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
-        // Cherche le mot-clé "#end" dans chaque ligne
         if (strstr(buffer, "#end") != NULL) {
-            // Lire la ligne suivante pour obtenir l'identifiant du nœud de fin
             if (fgets(buffer, 256, file) != NULL) {
                 return atoi(buffer);
             }
         }
     }
-    return -1; // Retourne -1 si le nœud de fin n'est pas trouvé
+    return -1; 
 }
 
-Error init_graph(Node **nodes, Node **start_node) {
-    if (nodes == NULL || *nodes == NULL) {
-        return NO_START_NODE; // Retourne une erreur si le tableau de nœuds est vide
+Node* init_graph(Node **nodes) {
+    if (nodes == NULL || *nodes == NULL) { // if node is NULL return error
+        return NULL; 
     }
 
-    *start_node = nodes[0]; // Le premier nœud du tableau est la tête de la liste chaînée
-    Node *current = *start_node;
+    Node *head = nodes[0]; 
+    Node *current = head;
 
-    for (int i = 1; nodes[i] != NULL; i++) {
-        current->next = nodes[i]; // Lien vers le nœud suivant
+    for (int i = 1; nodes[i] != NULL; i++) { // Loop through the nodes
+        current->links = &nodes[i];
         current = nodes[i];
     }
 
-    current->next = NULL; // Le dernier nœud ne pointe vers aucun autre nœud
- 
-    return 0; // Retourne 0 pour indiquer que tout s'est bien passé
+    current->links = NULL; 
+
+    return head; // Return the head of the graph    
 }
