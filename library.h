@@ -2,8 +2,8 @@
 #define PATHFINDING
 
 #include <stdio.h>
-#include <stdlib.h>
 
+// Déclaration de l'énumération Error
 typedef enum {
   FILE_NOT_FOUND = 1,
   NO_START_NODE = 2,
@@ -12,22 +12,18 @@ typedef enum {
   BAD_FILE_FORMAT = 5
 } Error;
 
+// Déclaration de la structure Node
 typedef struct n {
   int id;
-  struct n **links;
+  struct n *next; // Pointeur vers le nœud suivant
 } Node;
 
-// +---------+
-// |  NODES  |
-// +---------+
-void parse_nodes_file(FILE* file); // Assign every nodes in file to 
+// Déclarations de fonctions
+void parse_nodes_file(FILE* file);
 int nodes_quantity(FILE* file);
 int nodes_links_quantity(FILE* file);
 int node_start(FILE* file);
 int node_end(FILE* file);
-
-// +-------------------------+
-// |  PATHFINDING ALGORITHM  |
-// +-------------------------+
+Error init_graph(Node **nodes, Node **start_node); // Déclaration de la fonction init_graph
 
 #endif
