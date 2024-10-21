@@ -1,3 +1,5 @@
+#include "library.h"
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,16 +9,27 @@
 // |  NODES  |
 // +---------+
 void parse_nodes_file(FILE* file) {
-    
+    char buffer[256];
+    int count = 0; 
+    while (fgets(buffer, 256, file) != NULL) {
+        if (strstr(buffer, "#node") != NULL) { // cherche le mot clé node 
+            while (fgets(buffer, 256, file) != NULL && !strstr(buffer, "#links")) { 
+                if (buffer[0] != '#' && buffer[0] != '\n' && buffer[0] != '\r') { // vérifie si la ligne n'est pas vide et qu'elle ne commence pas par #
+                    count++; 
+                }
+            }
+            break; 
+        }
+    }
 }
 
 int nodes_quantity(FILE* file) {
     char buffer[256];
     int count = 0; 
     while (fgets(buffer, 256, file) != NULL) {
-        if (strstr(buffer, "#node") != NULL) { // cherche le mot clé node 
+        if (strstr(buffer, "#node") != NULL) { // Search for "#nodes" in the file
             while (fgets(buffer, 256, file) != NULL && !strstr(buffer, "#links")) { 
-                if (buffer [0] != '#' && buffer[0] != '\n' && buffer[0] != '\r') { // vérifie si la ligne n'est pas vide et qu'elle ne commence pas par #
+                if (buffer[0] != '#') { // Check that the line is really a node
                     count++; 
                 }
             }
@@ -30,11 +43,10 @@ int nodes_links_quantity(FILE* file) {
     char buffer[256];
     int count = 0; // Compteur pour les liens
     while (fgets(buffer, 256, file) != NULL) {
-        if (strstr(buffer, "#links") != NULL) { // cherche mot clé links
-            while (fgets(buffer, 256, file) != NULL && buffer[0] != '#') {
-                if (buffer[0] != '\n' && buffer[0] != '\r') {
-                    count++;
-                }
+        printf("Debug: %s", buffer);
+        if (strstr(buffer, "#links") != NULL) { // Search for "#links" in the file
+            while (fgets(buffer, 256, file) != NULL) {
+                count++;
             }
             break;
         }
@@ -45,23 +57,23 @@ int nodes_links_quantity(FILE* file) {
 int node_start(FILE* file) {
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
-        if (strstr(buffer, "#start") != NULL) { // cherche le mot start dans le txt
+        if (strstr(buffer, "#start") != NULL) { // Search for "#start" in the file
             if (fgets(buffer, 256, file) != NULL) { 
-                return atoi(buffer); // retourne l'identifiant du nœud de départ
+                return atoi(buffer); // Return the line after it, aka the node
             }
         }
     }
-    return -1; // retourn ça si ya rien dans le start 
+    return NO_START_NODE; // Error
 }
 
 int node_end(FILE* file) {
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
-        if (strstr(buffer, "#end") != NULL) {
+        if (strstr(buffer, "#end") != NULL) { // Search for "#end" in the file
             if (fgets(buffer, 256, file) != NULL) {
-                return atoi(buffer);
+                return atoi(buffer); // Return the line after it, aka the node
             }
         }
     }
-    return -1; // retourn ça si ya rien dans le end
+    return NO_END_NODE; // Error
 }
