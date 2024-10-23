@@ -40,8 +40,8 @@ Ce projet a pour objectif d'implémenter un algorithme permettant de trouver le 
 
 1. Cloner ce dépôt GitHub :
     ```bash
-    git clone https://github.com/ton-utilisateur/nom-du-repo.git
-    cd nom-du-repo
+    git clone https://github.com/Logipek/Pathfinding
+    cd Pathfinding
     ```
 
 2. Compiler le projet avec la commande `make` :
