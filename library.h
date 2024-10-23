@@ -23,6 +23,7 @@ int nodes_quantity(FILE* file);
 int nodes_links_quantity(FILE* file);
 int node_start(FILE* file);
 int node_end(FILE* file);
+Node** init_nodes(char* filename);
 Node* init_graph(Node **nodes); // Déclaration de la fonction init_graph
 
 #endif

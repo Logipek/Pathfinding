@@ -62,6 +62,27 @@ int node_end(FILE* file) {
     return -1; 
 }
 
+Node** init_nodes(char* filename) {
+    FILE* file = fopen(filename, "r");
+    Nodes** nodes = malloc(sizeof(Node*));
+    int nodes_count = 0;
+
+    char buffer[256];
+    while (fgets(buffer, 256, file)) {
+        if (strstr(buffer, "#nodes")) {
+            while (fgets(buffer, 256, file)) {
+                if (!strstr(buffer, "#links")) {
+                    nodes_count++;
+                    nodes = realloc(sizeof(Node*) * nodes_count);
+                    Node* nodes[nodes_count] = malloc(sizeof(Node));
+                    nodes[nodes_count]->id = atoi(buffer);
+                }
+                break;
+            }
+        }
+    }
+}
+
 Node* init_graph(Node **nodes) {
     if (nodes == NULL || *nodes == NULL) { // if node is NULL return error
         return NULL; 
