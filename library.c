@@ -39,10 +39,11 @@ int nodes_links_quantity(FILE* file) {
 }
 
 int node_start(FILE* file) {
+    rewind(file);
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
-        if (strstr(buffer, "#start") != NULL) {
-            while (fgets(buffer, 256, file) != NULL) {
+        if (strstr(buffer, "#start")) {
+            while (fgets(buffer, 256, file)) {
                 return atoi(buffer);
             }
         }
@@ -51,10 +52,11 @@ int node_start(FILE* file) {
 }
 
 int node_end(FILE* file) {
+    rewind(file);
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
-        if (strstr(buffer, "#end") != NULL) {
-            while (fgets(buffer, 256, file) != NULL) {
+        if (strstr(buffer, "#end")) {
+            while (fgets(buffer, 256, file)) {
                 return atoi(buffer);
             }
         }
