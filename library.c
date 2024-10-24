@@ -42,7 +42,7 @@ int node_start(FILE* file) {
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
         if (strstr(buffer, "#start") != NULL) {
-            if (fgets(buffer, 256, file) != NULL) {
+            while (fgets(buffer, 256, file) != NULL) {
                 return atoi(buffer);
             }
         }
@@ -54,7 +54,7 @@ int node_end(FILE* file) {
     char buffer[256];
     while (fgets(buffer, 256, file) != NULL) {
         if (strstr(buffer, "#end") != NULL) {
-            if (fgets(buffer, 256, file) != NULL) {
+            while (fgets(buffer, 256, file) != NULL) {
                 return atoi(buffer);
             }
         }
@@ -64,7 +64,7 @@ int node_end(FILE* file) {
 
 Node** init_nodes(char* filename) {
     FILE* file = fopen(filename, "r");
-    Nodes** nodes = malloc(sizeof(Node*));
+    Node** nodes = malloc(sizeof(Node*));
     int nodes_count = 0;
 
     char buffer[256];
@@ -73,8 +73,7 @@ Node** init_nodes(char* filename) {
             while (fgets(buffer, 256, file)) {
                 if (!strstr(buffer, "#links")) {
                     nodes_count++;
-                    nodes = realloc(sizeof(Node*) * nodes_count);
-                    Node* nodes[nodes_count] = malloc(sizeof(Node));
+                    nodes = realloc(nodes, sizeof(Node*) * nodes_count);
                     nodes[nodes_count]->id = atoi(buffer);
                 }
                 break;
