@@ -74,14 +74,15 @@ Node** init_nodes(char* filename) {
         if (strstr(buffer, "#nodes")) {
             while (fgets(buffer, 256, file)) {
                 if (!strstr(buffer, "#links")) {
+                    nodes[nodes_count] = malloc(sizeof(Node));
+                    *nodes[nodes_count]->links = malloc(sizeof(Node*));
+                    nodes[nodes_count]->id = atoi(buffer);                                    // Set the id of the node to the parsed id
                     nodes_count++;
-                    nodes = realloc(nodes, sizeof(Node*) * nodes_count);
-                    nodes[nodes_count]->id = atoi(buffer);
                 }
-                break;
             }
         }
     }
+    return nodes;
 }
 
 Node* init_graph(Node **nodes) {
